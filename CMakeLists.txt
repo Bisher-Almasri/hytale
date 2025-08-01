@@ -26,9 +26,6 @@ set(SOURCES
   src/Rendering/Renderer.cpp
   src/Rendering/Chunk.hpp
   src/Rendering/Chunk.cpp
-  src/Rendering/ChunkManager.hpp
-  src/Rendering/ChunkManager.cpp
-
 
   src/Rendering/Meshes/GLTFLoader.hpp
   src/Rendering/Meshes/GLTFLoader.cpp
