@@ -8,6 +8,7 @@
 #include <backends/imgui_impl_opengl3.h>
 #include <imgui.h>
 #include <iostream>
+#include <memory>
 #include <tiny_gltf.h>
 
 Game::Game(GLuint width, GLuint height)

@@ -10,6 +10,7 @@
 #include <Rendering/Meshes/GLTFLoader.hpp>
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
+#include <memory>
 #include <vector>
 
 struct MeshData
@@ -37,6 +38,7 @@ class Game
     Renderer* renderer;
     std::vector<Mesh> modelMeshes;
     std::vector<Mesh> chunkMeshes;
+    int renderDistance = 2.0f;
     float speed = 25.5f;
     bool locked = true;
     bool wf = false;
