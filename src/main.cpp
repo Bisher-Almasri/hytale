@@ -42,9 +42,9 @@ int main()
     glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
-    #ifdef __APPLE__
+#ifdef __APPLE__
     glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
-    #endif
+#endif
 
     GLFWwindow* window =
         glfwCreateWindow(WINDOW_WIDTH, WINDOW_HEIGHT, "hypickel", nullptr, nullptr);
@@ -63,16 +63,20 @@ int main()
         exit(EXIT_FAILURE);
     }
 
-    glViewport(0, 0, WINDOW_WIDTH, WINDOW_HEIGHT);
+    int fbWidth, fbHeight;
+    glfwGetFramebufferSize(window, &fbWidth, &fbHeight);
+    glViewport(0, 0, fbWidth, fbHeight);
+    WINDOW_WIDTH = fbWidth;
+    WINDOW_HEIGHT = fbHeight;
 
     glEnable(GL_DEPTH_TEST);
 
     glfwSetFramebufferSizeCallback(window,
                                    [](GLFWwindow* window, int width, int height)
                                    {
-                                       glViewport(0, 0, width, height);
                                        WINDOW_WIDTH = width;
                                        WINDOW_HEIGHT = height;
+                                       glViewport(0, 0, width, height);
 
                                        game.handleResize(width, height);
                                    });

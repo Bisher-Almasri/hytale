@@ -1,9 +1,8 @@
 #include "Game.hpp"
 
 #include <GLFW/glfw3.h>
-#include <Rendering/Chunk.hpp>
-#include <Rendering/Meshes/Cube.hpp>
 #include <Rendering/Renderer.hpp>
+#include <Rendering/World.hpp>
 #include <backends/imgui_impl_glfw.h>
 #include <backends/imgui_impl_opengl3.h>
 #include <imgui.h>
@@ -62,8 +61,7 @@ void Game::Init(GLFWwindow* window)
 
     float cubeSize = 1.0f;
     int chunkSize = 16;
-    Chunk chunk(chunkSize, cubeSize, "assets/textures/grass_block.png");
-    chunkMeshes = chunk.getMeshes();
+    world = new World(12345u, chunkSize, cubeSize, "assets/textures/grass_block.png");
 }
 
 void Game::Update(float deltaTime)
@@ -105,9 +103,10 @@ void Game::Render()
     ImGui::NewFrame();
     renderer->Render(modelMeshes);
 
-    for (const auto& chunkMesh : chunkMeshes)
+    auto nearbyMeshes = world->getMeshesNear(camera->Position, renderDistance);
+    for (const auto& mesh : nearbyMeshes)
     {
-        renderer->Render(chunkMesh);
+        renderer->Render(mesh);
     }
 
     ImGui::Begin("camera");
@@ -141,4 +140,5 @@ Game::~Game()
 {
     delete shader;
     delete camera;
+    delete world;
 }

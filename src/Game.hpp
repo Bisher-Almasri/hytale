@@ -4,6 +4,7 @@
 // clang-format on
 #include "GLFW/glfw3.h"
 #include "Rendering/Renderer.hpp"
+#include "Rendering/World.hpp"
 
 #include <Helpers/Camera.hpp>
 #include <Helpers/Shader.hpp>
@@ -36,9 +37,9 @@ class Game
     Shader* shader;
     Camera* camera;
     Renderer* renderer;
+    World* world;
     std::vector<Mesh> modelMeshes;
-    std::vector<Mesh> chunkMeshes;
-    int renderDistance = 2.0f;
+    int renderDistance = 2;
     float speed = 25.5f;
     bool locked = true;
     bool wf = false;

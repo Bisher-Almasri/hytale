@@ -17,6 +17,12 @@ struct Vec3Hash
 class Chunk
 {
   public:
+    Chunk() = default;
+
+    Chunk(std::vector<Mesh> m) : meshes(std::move(m))
+    {
+    }
+
     Chunk(int chunkSize, float cubeSize, const std::string& texturePath);
     std::vector<Mesh> getMeshes() const;
     Mesh createChunkMesh(const std::unordered_set<glm::ivec3, Vec3Hash>& blockPositions,
